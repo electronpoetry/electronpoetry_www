@@ -1,0 +1,46 @@
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css'>
+	<style type='text/css'>
+		.blue { color: #9BC4E2; }
+		a.blue:visited, a.blue:link, a.blue:hover { color: #9BC4E2; }
+	</style>
+</head>
+<body style="font-family: 'Lato', serif; color: black; font-size: 13px; line-height: 1.4em">
+	<h1 style="font-weight: 400">el<span class="blue">e</span>ctron poetry signature creator</h1>
+	<p>Note: use lowercase</p>
+	<form id="detailform">
+	<table>
+		<tbody>
+		<tr><td>Name</td><td><input size="80" type="text" data-elem="fullname" value="joe bloggs"/></td></tr>
+		<tr><td>Position</td><td><input size="80" type="text" data-elem="position" value="managing director"/></td></tr>
+		<tr><td>Tel</td><td><input size="80" type="text" data-elem="tel" value="+61 400 123 456"/></td></tr>
+		<tr><td>E-mail</td><td><input size="80" type="text" data-elem="email" value="joe.bloggs@electronpoetry.com"/></td></tr>
+		</tbody>
+	</table>
+	</form>					
+	<div>
+<div style="font-size: 16px; font-weight: 900; line-height: 1.5em" id="fullname">joe bloggs</div>
+<div><span id="position">managing director</span> | el<span class="blue">e</span>ctron poetry</div>
+<div id="tel">+61 400 123 456</div>
+<div><a id="email" href="mailto:joe.bloggs@electronpoetry.com" class="blue">joe.bloggs@electronpoetry.com</a></div>
+</div>
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+		treatInput = function(input) {
+			return $("<pre></pre>").text($.trim(input)).html();
+		};
+
+		$("#detailform").find("input").bind('input', function() {
+			var elem = $(this).attr("data-elem");
+			var content = treatInput($(this).val())
+			$("#" + elem).html(content);
+			if(elem == "email") {
+				$("#email").attr("href", "mailto:" + content);
+			}
+		});
+});
+</script>
+</html>
